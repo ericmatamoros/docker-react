@@ -1,0 +1,11 @@
+sudo: required #superuser permisions to do the build
+language: generic 
+
+services:
+  - docker #installs a copy of docker in the running container
+
+before_install: #commands exec before the tests run
+  - docker build -t pythoneric1999/docker-react -f Dockerfile.dev .
+
+script: #what needs to be executed to run the test suite
+  - docker run -e CI=true pythoneric1999/docker-react npm run test 
